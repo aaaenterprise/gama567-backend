@@ -3,16 +3,16 @@ const admin = require('firebase-admin');
 class FirebaseNotificationService {
   constructor() {
     try {
-      const serviceAccount = require('../config/admin.json');
+      // const serviceAccount = require('../config/admin.json');
       
-      // Initialize Firebase Admin SDK if not already initialized
-      if (!admin.apps.length) {
-        admin.initializeApp({
-          credential: admin.credential.cert(serviceAccount),
-        });
-      }
+      // // Initialize Firebase Admin SDK if not already initialized
+      // if (!admin.apps.length) {
+      //   admin.initializeApp({
+      //     credential: admin.credential.cert(serviceAccount),
+      //   });
+      // }
       
-      this.messaging = admin.messaging();
+      // this.messaging = admin.messaging();
       console.log('Firebase Notification Service initialized successfully');
     } catch (error) {
       console.error('Error initializing Firebase Notification Service:', error);
