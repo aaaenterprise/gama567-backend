@@ -4,6 +4,9 @@ const SettingsSchema = new mongoose.Schema({
     howToPlay:{
         type:String
     },
+    privacyPolicy:{
+        type:String
+    },
     telegramSupport:{
         type:String
     },
