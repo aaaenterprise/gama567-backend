@@ -297,7 +297,7 @@ class DeclareResultService {
                 // saving data
                 const declare_result = await DeclareResult(declareResultData)
                 declare_result.save();
-                notificationService.sendToTopic( "Result Declared for " + queryData.gameName, " Result Declared " +queryData.betTime + " Pana is " + queryData.pana);
+                // notificationService.sendToTopic( "Result Declared for " + queryData.gameName, " Result Declared " +queryData.betTime + " Pana is " + queryData.pana);
                 return declare_result;
             }
 
@@ -322,7 +322,7 @@ class DeclareResultService {
                 })
                 declare_result_model.save()
 
-                notificationService.sendToTopic( "Result Declared for " + queryData.gameName, " Result Declared " +queryData.betTime + " Pana is " + queryData.pana);
+                // notificationService.sendToTopic( "Result Declared for " + queryData.gameName, " Result Declared " +queryData.betTime + " Pana is " + queryData.pana);
                 return declare_result_model;
             } else {
                 console.log("close --->2");
@@ -342,7 +342,7 @@ class DeclareResultService {
                 })
                 declare_result_model.save()
                 
-                notificationService.sendToTopic( "Result Declared for " + queryData.gameName, " Result Declared " +queryData.betTime + " Pana is " + queryData.pana);
+                // notificationService.sendToTopic( "Result Declared for " + queryData.gameName, " Result Declared " +queryData.betTime + " Pana is " + queryData.pana);
                 return declare_result_model;
             }
 
