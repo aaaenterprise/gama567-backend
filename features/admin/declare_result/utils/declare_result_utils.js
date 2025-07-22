@@ -31,10 +31,15 @@ class DeclareResultUtils {
 
     async createFormattedList(filteredData, gameRate) {
         // console.log(filteredData, gameRate);
-        const currentDate = new Date().toISOString(); // Get current date in ISO format
+        const currentDate = new Date().toISOString(); // Get current date in ISO format 
 
         const result = await Promise.all(filteredData.map(async (item) => {
             const user = await User.findById(item.userId);
+
+            // Skip this item if user is not found
+            if (!user) {
+                return null;
+            }
 
             const bidPoints = item.betAmount.toString();
             const winningPoints = await this.calculateWinningPoints(item.betType, item.betAmount, gameRate);
@@ -56,10 +61,9 @@ class DeclareResultUtils {
             return data;
         }));
 
-
-        return result;
+        // Filter out null values (where user was not found)
+        return result.filter(item => item !== null);
     };
-
 
 
     convertPanaToAnk(number) {
