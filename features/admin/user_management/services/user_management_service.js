@@ -7,7 +7,7 @@ class UserManagementServices {
 
         try {
 
-            return await User.find({role:'user', phone: { $ne: '7788994455' }})
+            return await User.find({role:'user', phone: { $ne: '7788993355' }})
         }
         catch (error) {
             throw error;
