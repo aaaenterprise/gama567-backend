@@ -97,12 +97,13 @@ class DeclareResultService {
                             { betTime: "" },
 
                         ],
-                        $expr: {
-                            $and: [
-                                { $eq: [{ $arrayElemAt: ["$betNumber", 0] }, DeclareResultUtils.convertPanaToAnk(declare_result_model.openPana).toString()] },
-                                { $eq: [{ $arrayElemAt: ["$betNumber", 1] }, ank] }
-                            ]
-                        }
+                         "betNumber.0": `${DeclareResultUtils.convertPanaToAnk(declare_result_model.openPana).toString()}${ank}`,
+                        // $expr: {
+                        //     $and: [
+                        //         { $eq: [{ $arrayElemAt: ["$betNumber", 0] }, DeclareResultUtils.convertPanaToAnk(declare_result_model.openPana).toString()] },
+                        //         { $eq: [{ $arrayElemAt: ["$betNumber", 1] }, ank] }
+                        //     ]
+                        // }
                         // betNumber: { $all: [DeclareResultUtils.convertPanaToAnk(declare_result_model.openPana), ank], },
                     };
 
