@@ -38,6 +38,14 @@ const SettingsSchema = new mongoose.Schema({
         type: Boolean,
         default:false
     },
+ enableUPI:{
+        type: Boolean,
+        default:false
+    },
+    enablePaymentGatway:{
+        type: Boolean,
+        default:false
+    },
 
 
 });
