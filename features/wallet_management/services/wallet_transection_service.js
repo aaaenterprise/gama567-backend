@@ -81,6 +81,42 @@ class WalletTransectionServices {
             throw error;
         }
     }
+     async addMoneyByMobile(phone, transectionData) {
+
+        try {
+            const userExist = await User.findOne({ phone })
+            if (!userExist) {
+                throw new Error('User not found');
+            }
+
+            console.log({ userExist });
+
+            userExist.wallet = parseInt(userExist.wallet) + parseInt(transectionData.amount)
+            const user = await User.findByIdAndUpdate(userExist._id, userExist, { new: true });
+            const currentDate = new Date();
+
+            // Adjust the hours and minutes to match the Kolkata time zone offset
+            currentDate.setHours(currentDate.getHours() + 5); // Subtract 5 hours to adjust for Kolkata time zone
+            currentDate.setMinutes(currentDate.getMinutes() + 30); // Subtract 30 minutes to adjust for Kolkata time zone
+
+            // Convert the date to ISO string format
+            const isoString = currentDate.toISOString();
+            transectionData.userId = userExist._id
+
+
+            const transection = await WalletTransaction(transectionData);
+            transection.type = 'credit'
+            transection.timestamp = isoString;
+            transection.save();
+            return transection
+            // const user = await User(userData)
+            // user.save()
+            // return user
+        }
+        catch (error) {
+            throw error;
+        }
+    }
     async withdrawMoney(id, transectionData) {
 
         try {

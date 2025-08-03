@@ -97,6 +97,7 @@ async function setupExpressApp() {
     const WithdrawPointRoutes = require('./features/withdraw_points/routes/withdraw_point_route');
 
     const ImageSliderController = require('./features/admin/image_slider/controllers/image_slider_controller');
+const paymentRoutes = require('./features/payment/routes/paymen.routes');
 
     const adminRoutes = require('./features/admin/admin_routes');
     
@@ -105,6 +106,7 @@ async function setupExpressApp() {
     
     // Configure routes
     app.use('/api/auth', authRoutes);
+       app.use('/api/payment', paymentRoutes);
     app.use('/api/transaction', authMiddleware(), walletTransactionRoutes);
     app.use('/api/bet', authMiddleware(), BettingHistoryRoutes);
     app.use('/api/setting', SettingRoutes);
@@ -196,25 +198,25 @@ function setupCronJobs() {
 }
 
 // Main application entry point
-if (cluster.isPrimary) {
-    console.log(`Master process ${process.pid} is running`);
-    console.log(`Setting up ${numCPUs} workers...`);
+// if (cluster.isPrimary) {
+//     console.log(`Master process ${process.pid} is running`);
+//     console.log(`Setting up ${numCPUs} workers...`);
     
-    // Fork workers based on CPU count
-    for (let i = 0; i < numCPUs; i++) {
-        cluster.fork();
-    }
+//     // Fork workers based on CPU count
+//     for (let i = 0; i < numCPUs; i++) {
+//         cluster.fork();
+//     }
     
-    // Handle worker exit and restart workers
-    cluster.on('exit', (worker, code, signal) => {
-        console.log(`Worker ${worker.process.pid} died with code ${code} and signal ${signal}`);
-        console.log('Starting a new worker...');
-        cluster.fork();
-    });
-} else {
+//     // Handle worker exit and restart workers
+//     cluster.on('exit', (worker, code, signal) => {
+//         console.log(`Worker ${worker.process.pid} died with code ${code} and signal ${signal}`);
+//         console.log('Starting a new worker...');
+//         cluster.fork();
+//     });
+// } else {
     // Worker processes run the Express app
     setupExpressApp().catch(err => {
         console.error('Failed to start worker:', err);
         process.exit(1);
     });
-}
+// }
