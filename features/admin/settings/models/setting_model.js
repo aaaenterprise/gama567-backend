@@ -46,6 +46,9 @@ const SettingsSchema = new mongoose.Schema({
         type: Boolean,
         default:false
     },
+     paymentVideoUrl:{
+        type: String
+    },
 
 
 });
