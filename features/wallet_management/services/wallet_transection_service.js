@@ -31,7 +31,12 @@ class WalletTransectionServices {
 
                 },
 
-                description: { $regex: /You have added this money/i }
+                type: "credit",
+                description: {
+                    $not: {
+                        $regex: /winning|Your withdraw request rejected/i
+                    }
+                }
             }).populate("userId");
 
             // console.log('Transactions:', transactions);
