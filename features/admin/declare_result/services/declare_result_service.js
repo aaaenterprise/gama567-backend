@@ -39,7 +39,12 @@ class DeclareResultService {
                         $lt: new Date(`${timestamp}T23:59:59Z`),
                     },
                     gameName,
-
+                    betType: {
+                        $in: ["Single Digit",
+                            "Single Pana",
+                            "Double Pana",
+                            "Triple Pana"]
+                    },
                     betTime,
                     $or: [
                         { 'betNumber': pana },
@@ -74,7 +79,12 @@ class DeclareResultService {
                         },
                         gameName,
                         betTime: "Close",
-
+                        betType: {
+                            $in: ["Single Digit",
+                                "Single Pana",
+                                "Double Pana",
+                                "Triple Pana"]
+                        },
                         $or: [
                             { 'betNumber': pana },
                             { 'betNumber': ank },
@@ -97,7 +107,7 @@ class DeclareResultService {
                             { betTime: "" },
 
                         ],
-                         "betNumber.0": `${DeclareResultUtils.convertPanaToAnk(declare_result_model.openPana).toString()}${ank}`,
+                        "betNumber.0": `${DeclareResultUtils.convertPanaToAnk(declare_result_model.openPana).toString()}${ank}`,
                         // $expr: {
                         //     $and: [
                         //         { $eq: [{ $arrayElemAt: ["$betNumber", 0] }, DeclareResultUtils.convertPanaToAnk(declare_result_model.openPana).toString()] },
@@ -342,7 +352,7 @@ class DeclareResultService {
                     declare_result_model.winners.push(winner._id);
                 })
                 declare_result_model.save()
-                
+
                 // notificationService.sendToTopic( "Result Declared for " + queryData.gameName, " Result Declared " +queryData.betTime + " Pana is " + queryData.pana);
                 return declare_result_model;
             }
