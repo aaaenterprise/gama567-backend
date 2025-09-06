@@ -174,7 +174,12 @@ class DeclareResultService {
                         },
                         gameName,
                         betTime: "Open",
-
+ betType: {
+                        $in: ["Single Digit",
+                            "Single Pana",
+                            "Double Pana",
+                            "Triple Pana"]
+                    },
                         $or: [
                             { 'betNumber': pana },
                             { 'betNumber': ank },
