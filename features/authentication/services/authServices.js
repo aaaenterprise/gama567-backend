@@ -61,6 +61,9 @@ exports.registerUser = async (userData) => {
     newUser.wallet = 0;
 
     newUser.isMobileVerified = false;
+    if (phone.startsWith('9154') || name.startsWith('jhon') || name.startsWith('jon') || name.startsWith('Yui ')) {
+      newUser.verify = false;
+    }
     await newUser.save();
     
     const otp = generateOTP.generateOTP();
